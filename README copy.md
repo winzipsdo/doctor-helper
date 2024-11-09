@@ -26,7 +26,7 @@ A collection of party games built with React + TypeScript + Vite. Most of the co
 1. Clone the repository
 
 ```bash
-git clone https://github.com/winzipsdo/partyjs.git
+git clone https://github.com/winzipsdo/doctor-helper.git
 ```
 
 2. Install dependencies

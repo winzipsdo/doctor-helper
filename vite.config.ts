@@ -5,7 +5,7 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/partyjs/',
+  base: '/doctor-helper/',
   build: {
     outDir: 'docs',
     target: 'esnext',

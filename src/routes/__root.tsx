@@ -47,7 +47,7 @@ export const Route = createRootRoute({
           </button>
 
           <a
-            href="https://github.com/winzipsdo/partyjs"
+            href="https://github.com/winzipsdo/doctor-helper"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 hover:text-gray-600 transition-colors"
