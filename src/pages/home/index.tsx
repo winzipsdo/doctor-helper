@@ -12,7 +12,7 @@ export function HomePage() {
         onClick={handleCommand}
       >
         <img
-          src="/partyjs/partyjs.svg"
+          src="/doctor-helper/partyjs.svg"
           alt="PartyJS Logo"
           className={`w-full h-full object-contain ${styles.animateBounce}`}
         />

@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as HeartRateIndexImport } from './routes/heart-rate/index'
 import { Route as ApgarScoreIndexImport } from './routes/apgar-score/index'
 
 // Create Virtual Routes
@@ -33,6 +34,12 @@ const HomeIndexLazyRoute = HomeIndexLazyImport.update({
   path: '/home/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/home/index.lazy').then((d) => d.Route))
+
+const HeartRateIndexRoute = HeartRateIndexImport.update({
+  id: '/heart-rate/',
+  path: '/heart-rate/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ApgarScoreIndexRoute = ApgarScoreIndexImport.update({
   id: '/apgar-score/',
@@ -58,6 +65,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApgarScoreIndexImport
       parentRoute: typeof rootRoute
     }
+    '/heart-rate/': {
+      id: '/heart-rate/'
+      path: '/heart-rate'
+      fullPath: '/heart-rate'
+      preLoaderRoute: typeof HeartRateIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/home/': {
       id: '/home/'
       path: '/home'
@@ -73,12 +87,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/apgar-score': typeof ApgarScoreIndexRoute
+  '/heart-rate': typeof HeartRateIndexRoute
   '/home': typeof HomeIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/apgar-score': typeof ApgarScoreIndexRoute
+  '/heart-rate': typeof HeartRateIndexRoute
   '/home': typeof HomeIndexLazyRoute
 }
 
@@ -86,27 +102,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/apgar-score/': typeof ApgarScoreIndexRoute
+  '/heart-rate/': typeof HeartRateIndexRoute
   '/home/': typeof HomeIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apgar-score' | '/home'
+  fullPaths: '/' | '/apgar-score' | '/heart-rate' | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apgar-score' | '/home'
-  id: '__root__' | '/' | '/apgar-score/' | '/home/'
+  to: '/' | '/apgar-score' | '/heart-rate' | '/home'
+  id: '__root__' | '/' | '/apgar-score/' | '/heart-rate/' | '/home/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   ApgarScoreIndexRoute: typeof ApgarScoreIndexRoute
+  HeartRateIndexRoute: typeof HeartRateIndexRoute
   HomeIndexLazyRoute: typeof HomeIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ApgarScoreIndexRoute: ApgarScoreIndexRoute,
+  HeartRateIndexRoute: HeartRateIndexRoute,
   HomeIndexLazyRoute: HomeIndexLazyRoute,
 }
 
@@ -122,6 +141,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/apgar-score/",
+        "/heart-rate/",
         "/home/"
       ]
     },
@@ -130,6 +150,9 @@ export const routeTree = rootRoute
     },
     "/apgar-score/": {
       "filePath": "apgar-score/index.tsx"
+    },
+    "/heart-rate/": {
+      "filePath": "heart-rate/index.tsx"
     },
     "/home/": {
       "filePath": "home/index.lazy.tsx"

@@ -15,7 +15,10 @@ import GithubIcon from '@/assets/github.svg';
 
 const navigationRoutes = [{ label: '🏠 Home', path: '/home' }];
 
-const toolRoutes = [{ label: '🏥 Apgar Score', path: '/apgar-score' }];
+const toolRoutes = [
+  { label: '🏥 新生儿 Apgar 评分', path: '/apgar-score' },
+  { label: '🧠 小儿心率参考值', path: '/heart-rate' },
+];
 
 export const Route = createRootRoute({
   component: () => {
