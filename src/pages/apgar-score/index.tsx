@@ -63,26 +63,28 @@ export default function ApgarScore() {
   const totalScore = scores.reduce((sum, score) => sum + score, 0);
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">新生儿Apgar评分</h1>
+    <div className="max-w-2xl mx-auto p-2">
+      <h1 className="text-xl font-bold mb-2">新生儿Apgar评分</h1>
 
-      <div className="space-y-6">
+      <div className="space-y-2">
         {scoreItems.map((item, itemIndex) => (
-          <div key={item.name} className="border rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-3">{item.name}</h2>
-            <div className="grid grid-cols-3 gap-2">
+          <div key={item.name} className="border rounded-lg p-2">
+            <h2 className="text-base font-semibold mb-1">{item.name}</h2>
+            <div className="grid grid-cols-3 gap-1.5">
               {item.criteria.map((criterion) => (
                 <button
                   key={criterion.score}
                   onClick={() => handleScoreChange(itemIndex, criterion.score)}
-                  className={`p-2 border rounded ${
+                  className={`p-1 border rounded ${
                     scores[itemIndex] === criterion.score
                       ? 'bg-blue-500 text-white'
                       : 'hover:bg-gray-100'
                   }`}
                 >
-                  <div className="font-bold">{criterion.score}分</div>
-                  <div className="text-sm">{criterion.description}</div>
+                  <div className="font-bold text-sm">{criterion.score}分</div>
+                  <div className="text-sm leading-tight">
+                    {criterion.description}
+                  </div>
                 </button>
               ))}
             </div>
@@ -90,14 +92,14 @@ export default function ApgarScore() {
         ))}
       </div>
 
-      <div className="mt-8 text-center">
-        <div className="text-xl font-bold">总分: {totalScore}</div>
-        <div className="mt-2 text-gray-600">
+      <div className="mt-3 text-center">
+        <div className="text-lg font-bold">总分: {totalScore}</div>
+        <div className="text-sm text-gray-600">
           {totalScore >= 8
             ? '新生儿状态良好'
             : totalScore >= 4
-              ? '需要密切观察'
-              : '需要立即干预'}
+              ? '轻度窒息'
+              : '重度窒息'}
         </div>
       </div>
     </div>

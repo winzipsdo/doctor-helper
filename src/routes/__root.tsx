@@ -15,7 +15,7 @@ import GithubIcon from '@/assets/github.svg';
 
 const navigationRoutes = [{ label: '🏠 Home', path: '/home' }];
 
-const gameRoutes = [{ label: '🏥 Apgar Score', path: '/apgar-score' }];
+const toolRoutes = [{ label: '🏥 Apgar Score', path: '/apgar-score' }];
 
 export const Route = createRootRoute({
   component: () => {
@@ -43,7 +43,7 @@ export const Route = createRootRoute({
             onClick={() => setOpen(true)}
             className="flex-1 justify-between text-sm text-muted-foreground border rounded-md px-4 py-3"
           >
-            More games...
+            More tools...
           </button>
 
           <a
@@ -75,7 +75,7 @@ export const Route = createRootRoute({
                   setTimeout(() => inputRef.current?.focus(), 0);
                 }}
               >
-                Click to search games...
+                Click to search tools...
               </div>
             )}
             <CommandList>
@@ -93,8 +93,8 @@ export const Route = createRootRoute({
                   </CommandItem>
                 ))}
               </CommandGroup>
-              <CommandGroup heading="Games">
-                {gameRoutes.map((route) => (
+              <CommandGroup heading="Tools">
+                {toolRoutes.map((route) => (
                   <CommandItem
                     key={route.path}
                     onSelect={() => {
