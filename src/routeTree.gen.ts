@@ -19,7 +19,6 @@ import { Route as ApgarScoreIndexImport } from './routes/apgar-score/index'
 
 const IndexLazyImport = createFileRoute('/')()
 const HomeIndexLazyImport = createFileRoute('/home/')()
-const DiceRollIndexLazyImport = createFileRoute('/dice-roll/')()
 
 // Create/Update Routes
 
@@ -34,14 +33,6 @@ const HomeIndexLazyRoute = HomeIndexLazyImport.update({
   path: '/home/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/home/index.lazy').then((d) => d.Route))
-
-const DiceRollIndexLazyRoute = DiceRollIndexLazyImport.update({
-  id: '/dice-roll/',
-  path: '/dice-roll/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/dice-roll/index.lazy').then((d) => d.Route),
-)
 
 const ApgarScoreIndexRoute = ApgarScoreIndexImport.update({
   id: '/apgar-score/',
@@ -67,13 +58,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApgarScoreIndexImport
       parentRoute: typeof rootRoute
     }
-    '/dice-roll/': {
-      id: '/dice-roll/'
-      path: '/dice-roll'
-      fullPath: '/dice-roll'
-      preLoaderRoute: typeof DiceRollIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/home/': {
       id: '/home/'
       path: '/home'
@@ -89,14 +73,12 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/apgar-score': typeof ApgarScoreIndexRoute
-  '/dice-roll': typeof DiceRollIndexLazyRoute
   '/home': typeof HomeIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/apgar-score': typeof ApgarScoreIndexRoute
-  '/dice-roll': typeof DiceRollIndexLazyRoute
   '/home': typeof HomeIndexLazyRoute
 }
 
@@ -104,30 +86,27 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/apgar-score/': typeof ApgarScoreIndexRoute
-  '/dice-roll/': typeof DiceRollIndexLazyRoute
   '/home/': typeof HomeIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apgar-score' | '/dice-roll' | '/home'
+  fullPaths: '/' | '/apgar-score' | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apgar-score' | '/dice-roll' | '/home'
-  id: '__root__' | '/' | '/apgar-score/' | '/dice-roll/' | '/home/'
+  to: '/' | '/apgar-score' | '/home'
+  id: '__root__' | '/' | '/apgar-score/' | '/home/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   ApgarScoreIndexRoute: typeof ApgarScoreIndexRoute
-  DiceRollIndexLazyRoute: typeof DiceRollIndexLazyRoute
   HomeIndexLazyRoute: typeof HomeIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ApgarScoreIndexRoute: ApgarScoreIndexRoute,
-  DiceRollIndexLazyRoute: DiceRollIndexLazyRoute,
   HomeIndexLazyRoute: HomeIndexLazyRoute,
 }
 
@@ -143,7 +122,6 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/apgar-score/",
-        "/dice-roll/",
         "/home/"
       ]
     },
@@ -152,9 +130,6 @@ export const routeTree = rootRoute
     },
     "/apgar-score/": {
       "filePath": "apgar-score/index.tsx"
-    },
-    "/dice-roll/": {
-      "filePath": "dice-roll/index.lazy.tsx"
     },
     "/home/": {
       "filePath": "home/index.lazy.tsx"
